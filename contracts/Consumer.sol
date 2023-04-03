@@ -132,6 +132,10 @@ contract EnetscoresConsumer is ChainlinkClient {
     function getGameResolve(bytes32 _requestId, uint256 _idx) external view returns (GameResolve memory) {
         return _getGameResolveStruct(requestIdGames[_requestId][_idx]);
     }
+    function getGameResult(bytes32 _requestId, uint256 _idx) external view returns (uint8 homeScore, uint8 awayScore) {
+        GameResolve memory gameResolve = _getGameResolveStruct(requestIdGames[_requestId][_idx]);
+        return (gameResolve.homeScore, gameResolve.awayScore);
+    }
     function _getOracleAddress() external view returns (address) {
         return chainlinkOracleAddress();
     }

@@ -1,6 +1,7 @@
+// SPDX-License-Identifier: MIT
 // Reputation smart contract
 
-pragma solidity ^0.8.0;
+pragma solidity 0.8.15;
 
 contract Reputation {
     

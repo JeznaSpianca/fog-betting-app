@@ -9,4 +9,6 @@ Deployed Consumer contract: https://mumbai.polygonscan.com/address/0x3A1Ac99373F
 
 Oracle link: https://market.link/nodes/Enetpulse/integrations
 
+Onboarding proces??
+
 
