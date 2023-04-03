@@ -34,6 +34,7 @@ contract EnetscoresConsumer is ChainlinkClient {
         string status;
     }
     mapping(bytes32 => bytes[]) public requestIdGames;
+    event gameCreated(bytes32 reqId, uint256 l);
     error FailedTransferLINK(address to, uint256 amount);
     /**
      * @param _link the LINK token address.
@@ -62,6 +63,7 @@ contract EnetscoresConsumer is ChainlinkClient {
         recordChainlinkFulfillment(_requestId)
     {
         requestIdGames[_requestId] = _result;
+        emit gameCreated(_requestId, _result.length);
     }
     /**
      * @notice Requests the tournament games either to be created or to be resolved on a specific date.
