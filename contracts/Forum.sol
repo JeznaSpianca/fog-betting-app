@@ -7,6 +7,7 @@ contract Forum {
         address creator;
         mapping(uint256 => Message) messages;
         uint256 messageCount;
+        uint256 poolId;
     }
 
     struct Message {
@@ -19,12 +20,13 @@ contract Forum {
     uint256 public threadCount;
     mapping(uint256 => Thread) public threads;
 
-    function createThread(string memory _title) public {
+    function createThread(string memory _title, uint256 _poolId) public {
         threadCount++;
         Thread storage thread = threads[threadCount];
         thread.title = _title;
         thread.creator = msg.sender;
         thread.messageCount = 0;
+        thread.poolId = _poolId;
     }
 
     function postMessage(uint256 _threadId, string memory _content) public {
