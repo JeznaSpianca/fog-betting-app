@@ -25,7 +25,6 @@ contract DIDContract {
     }
 
     function getVisibleSettings(address _user) public view returns (string memory) {
-        require(_user == msg.sender, "Access denied");
         return userSettings[_user].visible;
     }
 }

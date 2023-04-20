@@ -63,6 +63,7 @@ contract Betting {
 
     function settleBettingPool(uint256 _poolId, bytes32 _requestID, uint256 _req_index) public {
         require(!bettingPools[_poolId].settled, "Pool has already been settled");
+        bettingPools[_poolId].settled = true;
         EnetscoresConsumer consumer = EnetscoresConsumer(ConsumerContract);
         (uint8 homeScore, uint8 awayScore) = consumer.getGameResult(_requestID, _req_index);
         
@@ -73,7 +74,6 @@ contract Betting {
         if (homeScore < awayScore) {
             outcome = 1;
         }
-        bettingPools[_poolId].settled = true;
         bettingPools[_poolId].outcome = outcome;
         uint256 totalWinningAmount = 0;
         uint256 totalBets = bettingPools[_poolId].totalBets;
@@ -116,6 +116,10 @@ contract Betting {
 
     function getGameID(uint256 _poolId) public view returns (uint256) {
         return bettingPools[_poolId].gameID;
+    }
+
+    function getPoolCount() public view returns (uint256) {
+        return poolCount:
     }
 
 }
