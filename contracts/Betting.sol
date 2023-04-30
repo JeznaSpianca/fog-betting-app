@@ -119,7 +119,7 @@ contract Betting {
     }
 
     function getPoolCount() public view returns (uint256) {
-        return poolCount:
+        return poolCount;
     }
 
 }
