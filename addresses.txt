@@ -12,3 +12,7 @@ Oracle link: https://market.link/nodes/Enetpulse/integrations
 Onboarding proces??
 
 
+
+Reputation contract address on mumbai: 0x992932a326D3F5F855fEB81e30d9c344Db8B72B0
+
+
