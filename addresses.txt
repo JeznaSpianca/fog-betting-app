@@ -1,11 +1,11 @@
-Consumer contract on Polygon Mumbai testnet: 0x3A1Ac99373Fd846De2d092F839BA0FD1096286c1
+Consumer contract on Polygon Mumbai testnet: 0x985aE4705d3de1daC98606fa27504BeFE66F182d
 Consumer data:
 Matic Mumbai Testnet
 Payment amount: 0.1 LINK
 JobID: d110b5c4b83d42dca20e410ac537cd94
 JobID as Bytes32: 0x6431313062356334623833643432646361323065343130616335333763643934
 
-Deployed Consumer contract: https://mumbai.polygonscan.com/address/0x3A1Ac99373Fd846De2d092F839BA0FD1096286c1
+Deployed Consumer contract: https://mumbai.polygonscan.com/address/0x985aE4705d3de1daC98606fa27504BeFE66F182d
 
 Oracle link: https://market.link/nodes/Enetpulse/integrations
 
@@ -14,5 +14,6 @@ Onboarding proces??
 
 
 Reputation contract address on mumbai: 0x992932a326D3F5F855fEB81e30d9c344Db8B72B0
+Betting contract on mumbai: 0xa792ab97CD60F5d90Ac2C34a397743314d3484AE
 
 
