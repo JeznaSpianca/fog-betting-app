@@ -7,7 +7,6 @@ export function DID() {
     return (
       <div>
         <h1>My dApp</h1>
-        <p>Hi there</p>
        <form>
             <label>
                 Visible setting update:
