@@ -24,7 +24,10 @@ export function DID() {
                 <input type="text" value={privateSettings} onChange={(e) => setPrivate(e.target.value)}/>
             </label>
             <button type="submit">Update</button>
-        </form> 
+        </form>
+        <button type="submit">Check Public </button>
+        <button type="submit">Check Private</button>
+      
       </div>
     );
   }
