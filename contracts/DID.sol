@@ -11,12 +11,17 @@ contract DIDContract {
     
     mapping(address => Settings) private userSettings;
 
-    event SettingsUpdated(address indexed user, string data, string visible);
+    event PrivateSettingsUpdated(address indexed user, string data);
+    event VisibleSettingsUpdated(address indexed user, string visible);
 
-    function updateSettings(string memory _data, string memory _visible) public {
+    function updatePrivateSettings(string memory _data) public {
         userSettings[msg.sender].data = _data;
+        emit PrivateSettingsUpdated(msg.sender, _data);
+    }
+
+    function updateVisibleSettings(string memory _visible) public {
         userSettings[msg.sender].visible = _visible;
-        emit SettingsUpdated(msg.sender, _data, _visible);
+        emit VisibleSettingsUpdated(msg.sender, _visible);
     }
 
     function getSettings(address _user) public view returns (string memory) {

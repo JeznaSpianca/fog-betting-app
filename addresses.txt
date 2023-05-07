@@ -15,5 +15,4 @@ Onboarding proces??
 
 Reputation contract address on mumbai: 0x992932a326D3F5F855fEB81e30d9c344Db8B72B0
 Betting contract on mumbai: 0xa792ab97CD60F5d90Ac2C34a397743314d3484AE
-
-
+DID contract: 0xa17b17ea742A4a0E2a4815139312822320484714
