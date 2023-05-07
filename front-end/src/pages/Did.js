@@ -10,14 +10,14 @@ export function DID() {
        <form>
             <label>
                 Visible setting update:
-                <input type="text" value={"address"} ></input>
+                <input type="text" value={""} ></input>
             </label>
             <button type="submit">Update</button>
             </form>
             <form>
             <label>
                 Private setting update:
-                <input type="text" value={"score"}></input>
+                <input type="text" value={""}></input>
             </label>
             <button type="submit">Update</button>
         </form> 
