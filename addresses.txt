@@ -1,4 +1,4 @@
-Consumer contract on Polygon Mumbai testnet: 0x985aE4705d3de1daC98606fa27504BeFE66F182d
+Consumer contract on Polygon Mumbai testnet: 0xFb748639b7CCb21F145B033CeD3BDB2D89D01888
 Consumer data:
 Matic Mumbai Testnet
 Payment amount: 0.1 LINK
@@ -12,7 +12,19 @@ Oracle link: https://market.link/nodes/Enetpulse/integrations
 Onboarding proces??
 
 
+Test data for bets:
+req id: 0xc5f1c30b7889162a2c72fb6028f16eb9344c18a83dd2a14004a713eb89408103
+game resolve, score: 4:1
+game id: 3901212
+contract add: 0x3A1Ac99373Fd846De2d092F839BA0FD1096286c1
+Betting contract: 0x72C75ce96D96D019F0D70ACD9e7c6e16c1001464
+
+
 
 Reputation contract address on mumbai: 0x992932a326D3F5F855fEB81e30d9c344Db8B72B0
 Betting contract on mumbai: 0xa792ab97CD60F5d90Ac2C34a397743314d3484AE
 DID contract: 0xa17b17ea742A4a0E2a4815139312822320484714
+
+football-data.org  data in case of enetscore not working:
+api key: 762ad25890e74fcc992bca3322cd3fc3
+premier league id: 2021

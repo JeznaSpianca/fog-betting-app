@@ -7,8 +7,9 @@ function Navigation() {
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/did">DID</Link></li>
+        <li><Link to="/create">CreatePools</Link></li>
         <li><Link to="/reputation">Reputation</Link></li>
-        <li><Link to="/betting">Reputation</Link></li>
+        <li><Link to="/betting">Betting</Link></li>
       </ul>
     </nav>
   );

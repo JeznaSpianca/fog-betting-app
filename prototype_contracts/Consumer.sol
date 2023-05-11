@@ -34,6 +34,9 @@ contract EnetscoresConsumer is ChainlinkClient {
         string status;
     }
     mapping(bytes32 => bytes[]) public requestIdGames;
+    bytes32 public latest_id; //Get lates id that was sent from oracle
+    address public owner; // Owner that uses link to send data
+    event gameCreated(bytes32 reqId, uint256 l);
     error FailedTransferLINK(address to, uint256 amount);
     /**
      * @param _link the LINK token address.
@@ -42,6 +45,12 @@ contract EnetscoresConsumer is ChainlinkClient {
     constructor(address _link, address _oracle) {
         setChainlinkToken(_link);
         setChainlinkOracle(_oracle);
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Not owner");
+        _;
     }
     /* ========== EXTERNAL FUNCTIONS ========== */
     function cancelRequest(
@@ -62,6 +71,7 @@ contract EnetscoresConsumer is ChainlinkClient {
         recordChainlinkFulfillment(_requestId)
     {
         requestIdGames[_requestId] = _result;
+        emit gameCreated(_requestId, _result.length);
     }
     /**
      * @notice Requests the tournament games either to be created or to be resolved on a specific date.
@@ -78,7 +88,7 @@ contract EnetscoresConsumer is ChainlinkClient {
         uint256 _market,
         uint256 _leagueId,
         uint256 _date
-    ) external {
+    ) external  onlyOwner {
         Chainlink.Request memory req = buildOperatorRequest(_specId, this.fulfillSchedule.selector);
         req.addUint("market", _market);
         req.addUint("leagueId", _leagueId);
@@ -103,7 +113,7 @@ contract EnetscoresConsumer is ChainlinkClient {
         uint256 _leagueId,
         uint256 _date,
         uint256[] calldata _gameIds
-    ) external {
+    ) external onlyOwner {
         Chainlink.Request memory req = buildOperatorRequest(_specId, this.fulfillSchedule.selector);
         req.addUint("market", _market);
         req.addUint("leagueId", _leagueId);
@@ -111,13 +121,13 @@ contract EnetscoresConsumer is ChainlinkClient {
         _addUintArray(req, "gameIds", _gameIds);
         sendOperatorRequest(req, _payment);
     }
-    function setOracle(address _oracle) external {
+    function setOracle(address _oracle) external onlyOwner {
         setChainlinkOracle(_oracle);
     }
-    function setRequestIdGames(bytes32 _requestId, bytes[] memory _games) external {
+    function setRequestIdGames(bytes32 _requestId, bytes[] memory _games) external onlyOwner {
         requestIdGames[_requestId] = _games;
     }
-    function withdrawLink(address payable _payee, uint256 _amount) external {
+    function withdrawLink(address payable _payee, uint256 _amount) external onlyOwner {
         LinkTokenInterface linkToken = LinkTokenInterface(chainlinkTokenAddress());
         if (!linkToken.transfer(_payee, _amount)) {
             revert FailedTransferLINK(_payee, _amount);
@@ -129,6 +139,10 @@ contract EnetscoresConsumer is ChainlinkClient {
     }
     function getGameResolve(bytes32 _requestId, uint256 _idx) external view returns (GameResolve memory) {
         return _getGameResolveStruct(requestIdGames[_requestId][_idx]);
+    }
+    function getGameResult(bytes32 _requestId, uint256 _idx) external view returns (uint8 homeScore, uint8 awayScore) {
+        GameResolve memory gameResolve = _getGameResolveStruct(requestIdGames[_requestId][_idx]);
+        return (gameResolve.homeScore, gameResolve.awayScore);
     }
     function _getOracleAddress() external view returns (address) {
         return chainlinkOracleAddress();

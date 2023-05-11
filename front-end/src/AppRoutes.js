@@ -4,6 +4,7 @@ import Web3Home from "./pages/Web3Home";
 import { DID } from './pages/Did';
 import { Reputation } from "./pages/Reputation";
 import { Betting } from "./pages/Betting";
+import { CreatePools } from "./pages/CreatePools";
 
 function AppRoutes() {
   return (
@@ -11,6 +12,7 @@ function AppRoutes() {
       <Route exact path="/" element={<Web3Home/>} />
       <Route exact path="/did" element={<DID/>} />
       <Route exact path="/reputation" element={<Reputation/>} />
+      <Route exact path="/create" element={<CreatePools/>} />
       <Route exact path="/betting" element={<Betting/>} />
     </Routes>
   );

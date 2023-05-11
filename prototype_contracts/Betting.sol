@@ -65,11 +65,8 @@ contract Betting {
         require(!bettingPools[_poolId].settled, "Pool has already been settled");
         require(msg.sender == bettingPools[_poolId].owner, "You need to be an owner");
         bettingPools[_poolId].settled = true;
-        BettingPool storage pool = bettingPools[_poolId];
         EnetscoresConsumer consumer = EnetscoresConsumer(bettingPools[_poolId].cons_contract);
-        EnetscoresConsumer.GameResolve memory game = consumer.getGameResolve(_requestID, _req_index);
-        uint256 homeScore = game.homeScore;
-        uint256 awayScore = game.awayScore;
+        (uint8 homeScore, uint8 awayScore) = consumer.getGameResult(_requestID, _req_index);
         
         uint256 outcome = 2;
         if (homeScore > awayScore) {
@@ -78,32 +75,18 @@ contract Betting {
         if (homeScore < awayScore) {
             outcome = 1;
         }
-        pool.outcome = outcome;
-        uint256 totalLossAmount = 0;
-        uint256 totalWinAmount = 0;
-        uint256 totalBets = pool.totalBets;
+        bettingPools[_poolId].outcome = outcome;
+        uint256 totalWinningAmount = 0;
+        uint256 totalBets = bettingPools[_poolId].totalBets;
+        uint256 owner_fee = bettingPools[_poolId].totalAmount * bettingPools[_poolId].ownerFee / 100;
+        bettingPools[_poolId].totalAmount -= owner_fee;
+        balances[bettingPools[_poolId].owner]+= owner_fee;
         for (uint256 i = 1; i <= totalBets; i++) {
-            Bet storage bet = pool.bets[i];
-            if (bet.outcome != outcome) {
-                totalLossAmount+= bet.amount;
-            }
-            else{
-                totalWinAmount+=bet.amount;
-            }
-        }
-        if(totalLossAmount>0) {
-            uint256 owner_fee = totalLossAmount * pool.ownerFee / 100;
-            pool.totalAmount -= owner_fee;
-            totalLossAmount-=owner_fee;
-            balances[pool.owner]+= owner_fee;
-        }
-        if(totalWinAmount>0){
-            for (uint256 i = 1; i <= totalBets; i++) {
-                Bet storage bet = pool.bets[i];
-                if (bet.outcome == outcome) {
-                    uint256 winnings = bet.amount + bet.amount * totalLossAmount / totalWinAmount;
-                    balances[bet.bettor] += winnings;
-                }
+            Bet storage bet = bettingPools[_poolId].bets[i];
+            if (bet.outcome == outcome) {
+                uint256 winnings = bet.amount * bettingPools[_poolId].totalAmount / bettingPools[_poolId].totalBets;
+                balances[bet.bettor] += winnings;
+                totalWinningAmount += winnings;
             }
         }
     }
