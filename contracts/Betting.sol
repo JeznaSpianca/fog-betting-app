@@ -61,11 +61,13 @@ contract Betting {
         bettingPools[_poolId].totalAmount += msg.value;
     }
 
-    function settleBettingPool(uint256 _poolId, bytes32 _requestID, uint256 _req_index) public {
+    function settleBettingPool(uint256 _poolId) public {
         require(!bettingPools[_poolId].settled, "Pool has already been settled");
         require(msg.sender == bettingPools[_poolId].owner, "You need to be an owner");
         bettingPools[_poolId].settled = true;
         BettingPool storage pool = bettingPools[_poolId];
+        bytes32 _requestID = pool.requestID;
+        uint256 _req_index = pool.req_index;
         EnetscoresConsumer consumer = EnetscoresConsumer(bettingPools[_poolId].cons_contract);
         EnetscoresConsumer.GameResolve memory game = consumer.getGameResolve(_requestID, _req_index);
         uint256 homeScore = game.homeScore;

@@ -10,6 +10,7 @@ function Navigation() {
         <li><Link to="/create">CreatePools</Link></li>
         <li><Link to="/reputation">Reputation</Link></li>
         <li><Link to="/betting">Betting</Link></li>
+        <li><Link to="/forum">Forum</Link></li>
       </ul>
     </nav>
   );

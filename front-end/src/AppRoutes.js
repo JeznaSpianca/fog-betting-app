@@ -5,6 +5,7 @@ import { DID } from './pages/Did';
 import { Reputation } from "./pages/Reputation";
 import { Betting } from "./pages/Betting";
 import { CreatePools } from "./pages/CreatePools";
+import { Forum } from "./pages/Forum";
 
 function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ function AppRoutes() {
       <Route exact path="/reputation" element={<Reputation/>} />
       <Route exact path="/create" element={<CreatePools/>} />
       <Route exact path="/betting" element={<Betting/>} />
+      <Route exact path="/forum" element={<Forum/>} />
     </Routes>
   );
 }
