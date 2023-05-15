@@ -80,7 +80,7 @@ export function Betting() {
         setStatus("Submitting transaction...");
     
         try {
-          await contract.methods.settleBettingPool(pool_id,reqID,reqInd).send({ from: accounts[0] });
+          await contract.methods.settleBettingPool(pool_id_settle).send({ from: accounts[0] });
           setStatus("Transaction successful!");
         } catch (error) {
           console.error(error);
@@ -154,10 +154,6 @@ export function Betting() {
             <label>
                 Pool ID:
                 <input type="number" value={pool_id_settle} onChange={(e) => setPoolIDSettle(e.target.value)} />
-                Req ID:
-                <input type="text" value={reqID} onChange={(e) => setReqID(e.target.value)} />
-                Req index:
-                <input type="number" value={reqInd} onChange={(e) => setReqInd(e.target.value)} />
                 <button type="submit">Submit</button>
                 <p>{status}</p>
             </label>
