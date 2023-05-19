@@ -20,7 +20,7 @@ const betting_contract = {
 
 const forum_contract = {
   abi: [{"inputs":[{"internalType":"string","name":"_title","type":"string"},{"internalType":"uint256","name":"_poolId","type":"uint256"}],"name":"createThread","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"_threadId","type":"uint256"}],"name":"getThread","outputs":[{"components":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"content","type":"string"},{"internalType":"address","name":"author","type":"address"},{"internalType":"uint256","name":"timestamp","type":"uint256"}],"internalType":"struct Forum.Message[]","name":"","type":"tuple[]"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"_threadId","type":"uint256"},{"internalType":"string","name":"_content","type":"string"}],"name":"postMessage","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"threadCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"threads","outputs":[{"internalType":"uint256","name":"id","type":"uint256"},{"internalType":"string","name":"title","type":"string"},{"internalType":"address","name":"creator","type":"address"},{"internalType":"uint256","name":"messageCount","type":"uint256"},{"internalType":"uint256","name":"poolId","type":"uint256"}],"stateMutability":"view","type":"function"}],
-  address: "0x55bAe3CE65E1FfB98DE5ed3A70743b4231e497A5"
+  address: "0x312836079EE826089c17ba20Ec3c6894fE516770"
 };
   
   module.exports = {

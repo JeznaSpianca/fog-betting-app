@@ -6,7 +6,6 @@ const contracts = require("../contracts.js");
 export function Forum () {
 
   async function getThreadCountFromContract() {
-    const accounts = await web3.eth.getAccounts();
     const contractAddress = contracts.forum_contract.address;
     const contractABI = contracts.forum_contract.abi;
 
@@ -17,12 +16,11 @@ export function Forum () {
   }
 
   async function getThreadFromContract(ind) {
-    const accounts = await web3.eth.getAccounts();
     const contractAddress = contracts.forum_contract.address;
     const contractABI = contracts.forum_contract.abi;
 
     const contract = new web3.eth.Contract(contractABI, contractAddress);
-    const thread = await contract.methods.getThread(ind).call();
+    const thread = await contract.methods.threads(ind).call();
     return thread;
   }
 
@@ -30,6 +28,20 @@ export function Forum () {
   const [currentPage, setCurrentPage] = useState(1);
   const [threadsPerPage] = useState(5);
   const [isLoading, setIsLoading] = useState(true);
+
+  const [title, setTitle] = useState("");
+  const [poolID, setPoolID] = useState("");
+
+  const handleSubmitThread = async (event) => {
+    event.preventDefault();
+    const accounts = await web3.eth.getAccounts();
+    const contractAddress = contracts.forum_contract.address;
+    const contractABI = contracts.forum_contract.abi;
+
+    const contract = new web3.eth.Contract(contractABI, contractAddress);
+    await contract.methods.createThread(title, poolID).send({ from: accounts[0] });
+    window.location.reload();
+  };
 
   useEffect(() => {
     const fetchThreads = async () => {
@@ -79,8 +91,8 @@ export function Forum () {
       ) : (
         <ul>
           {currentThreads.map((thread) => (
-            <li key={thread[0][0]}>
-              <Link to={`/thread/${thread[0][0]}`}>{thread[0][1]}</Link>
+            <li key={thread.id}>
+              <Link to={`/thread/${thread.id}`}>{thread.title}</Link>
             </li>
           ))}
         </ul>
@@ -97,6 +109,20 @@ export function Forum () {
           </ul>
         </div>
       )}
+      <div>
+        <h2>Create forum Thread</h2>
+        <form onSubmit={handleSubmitThread}>
+            <label>
+                Title:
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+            </label>
+            <label>
+                Pool ID:
+                <input type="number" value={poolID} onChange={(e) => setPoolID(e.target.value)} />
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+        </div>
     </div>
   );
 };
