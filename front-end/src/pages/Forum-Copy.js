@@ -145,7 +145,7 @@ export function Forum() {
       };
 
     return (
-      <div>
+      <div className="a">
         <h1>Create Thread</h1>
         <form onSubmit={handleSubmitCreateThread}>
             <label>

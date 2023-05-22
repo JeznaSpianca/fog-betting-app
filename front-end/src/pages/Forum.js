@@ -82,7 +82,7 @@ export function Forum () {
   console.log(currentThreads);
 
   return (
-    <div>
+    <div className='a'>
       <h1>Thread List</h1>
       {isLoading ? (
         <p>Loading threads...</p>

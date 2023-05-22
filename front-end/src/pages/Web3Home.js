@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className='a'>
       <h1>My dApp</h1>
       {web3 && (
         <p>

@@ -74,7 +74,7 @@ export function DID() {
   }
 
   return (
-      <div>
+      <div className='a'>
         <h1>My dApp</h1>
        <form onSubmit={setVisibleSettings}>
             <label>

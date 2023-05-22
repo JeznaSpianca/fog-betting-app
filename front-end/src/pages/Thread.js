@@ -49,7 +49,7 @@ export function Thread() {
     }
   
     return (
-      <div>
+      <div className='a'>
         <h1>Thread title: {threadInfo.title}</h1>
         <p>Thread for pool: {threadInfo.poolId}</p>
         {thread.map((thr) => (

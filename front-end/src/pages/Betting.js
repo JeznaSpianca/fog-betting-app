@@ -108,7 +108,7 @@ export function Betting() {
       };
 
     return (
-      <div>
+      <div className="a">
         <h1>Place bet</h1>
 
         <form onSubmit={handleSubmitPlaceBet}>

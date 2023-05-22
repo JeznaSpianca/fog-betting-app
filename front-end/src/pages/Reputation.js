@@ -56,7 +56,7 @@ export function Reputation() {
     };
 
     return (
-      <div>
+    <div className="a">
         <h1>My dApp</h1>
 
         <form onSubmit={handleSubmit}>
@@ -82,7 +82,7 @@ export function Reputation() {
       </form>
       {status_get && <p>{status_get}</p>}
       {reputation && <p>Reputation: {reputation}</p>}
-      </div>
+    </div>
       
     );
   }

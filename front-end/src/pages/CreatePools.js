@@ -71,7 +71,7 @@ export function CreatePools() {
       }
 
     return (
-      <div>
+      <div className="a">
         <h1>Create betting pool</h1>
         <div>
           <p>Enetscores data oracle seems to be malfunctioning due to the enetscore api not working correctly. This means that when
