@@ -14,10 +14,21 @@ code {
 }
 
 
-nav {
+div.left{
+  height: 500px;
+  width: 250px;
   float: left;
-  background-color:antiquewhite;
-  margin-right: 10px;
+}
+
+ul{
+  list-style-type: none;
+}
+nav {
+  margin-left: 50px;
+  margin-top: 10px;
+  background-color:aquamarine;
+  height: 200px;
+  border-radius: 25px;
 }
 div.a{
   text-align: center;
@@ -25,4 +36,14 @@ div.a{
   width: 80%;
   margin-left: 100px;
   
+}
+label{
+  margin-left: 10%;
+}
+
+p.b{
+  margin-left: 10px;
+}
+h1{
+  text-align: center;
 }

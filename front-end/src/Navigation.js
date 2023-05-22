@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 function Navigation() {
   return (
-    <nav>
+    <div className='left'>
+      <nav>
+      <p className='b'>Navigate to:</p>
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/did">DID</Link></li>
@@ -13,6 +15,7 @@ function Navigation() {
         <li><Link to="/forum">Forum</Link></li>
       </ul>
     </nav>
+    </div>
   );
 }
 
