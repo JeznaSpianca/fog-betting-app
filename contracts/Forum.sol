@@ -23,6 +23,7 @@ contract Forum {
 
     function createThread(string memory _title, uint256 _poolId) public {
         Thread storage thread = threads[threadCount];
+        thread.id = threadCount;
         threadCount++;
         thread.title = _title;
         thread.creator = msg.sender;

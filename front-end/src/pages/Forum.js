@@ -1,191 +1,128 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import web3 from '../web3';
 const contracts = require("../contracts.js");
 
-// Use web3 to interact with the Ethereum network
-export function Forum() {
-  
-    async function getWith() {
-        const accounts = await web3.eth.getAccounts();
-        const contractAddress = contracts.betting_contract.address;
-        const contractABI = contracts.betting_contract.abi;
-    
-        const contract = new web3.eth.Contract(contractABI, contractAddress);
-        const withdraw_am = await contract.methods.balances(accounts[0]).call();
-    
-        setWitAm(withdraw_am);
-    }
-    const [text, setText] = useState("");
+export function Forum () {
 
+  async function getThreadCountFromContract() {
+    const contractAddress = contracts.forum_contract.address;
+    const contractABI = contracts.forum_contract.abi;
 
-    const [address, setAddress] = useState("");
-    const [score, setScore] = useState("");
-    const [status, setStatus] = useState("");
+    const contract = new web3.eth.Contract(contractABI, contractAddress);
+    const count = await contract.methods.threadCount().call();
 
+    return count;
+  }
 
-    const [address_get, setAddress_get] = useState("");
-    const [reputation, setReputation] = useState("");
-    const [status_get, setStatus_get] = useState("");
+  async function getThreadFromContract(ind) {
+    const contractAddress = contracts.forum_contract.address;
+    const contractABI = contracts.forum_contract.abi;
 
-    const [pool, setPool] = useState("");
-    const [pool_id, setPoolID] = useState("");
-    const [title, setTitle] = useState("");
-    const [amount, setAmount] = useState("");
-    const [isVisible, setIsVisible] = useState(false);
-    const [pool_id_settle, setPoolIDSettle] = useState("");
-    const [with_amount, setWitAm] = useState("");
+    const contract = new web3.eth.Contract(contractABI, contractAddress);
+    const thread = await contract.methods.threads(ind).call();
+    return thread;
+  }
 
-    const [reqID, setReqID] = useState("");
-    const [reqInd, setReqInd] = useState("");
+  const [threads, setThreads] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [threadsPerPage] = useState(5);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [thread_id, setThreadID] = useState("");
-    const [thread_id_get, setThreadIDGet] = useState("");
-    const [message, setMessage] = useState("");
+  const [title, setTitle] = useState("");
+  const [poolID, setPoolID] = useState("");
 
-    const [thread, setThread] = useState("");
+  const handleSubmitThread = async (event) => {
+    event.preventDefault();
+    const accounts = await web3.eth.getAccounts();
+    const contractAddress = contracts.forum_contract.address;
+    const contractABI = contracts.forum_contract.abi;
 
-    const handleSubmitGetPool = async (event) => {
-        event.preventDefault();
-    
-        const contractAddress = contracts.betting_contract.address;
-        const contractABI = contracts.betting_contract.abi;
-    
-        const contract = new web3.eth.Contract(contractABI, contractAddress);
-        const pool = await contract.methods.bettingPools(pool_id).call();
-    
-        setPool(pool);
-        setIsVisible(true);
-      };
-  
-    const handleSubmitPlaceBet = async (event) => {
-      event.preventDefault();
-      const contractAddress = contracts.betting_contract.address;
-      const contractABI = contracts.betting_contract.abi;
-  
-      const contract = new web3.eth.Contract(contractABI, contractAddress);
-      const accounts = await web3.eth.getAccounts();
-  
-      setStatus("Submitting transaction...");
-  
-      try {
-        await contract.methods.placeBet(pool_id, score).send({ from: accounts[0], value: amount });
-        setStatus("Transaction successful!");
-      } catch (error) {
-        console.error(error);
-        setStatus("Transaction failed.");
+    const contract = new web3.eth.Contract(contractABI, contractAddress);
+    await contract.methods.createThread(title, poolID).send({ from: accounts[0] });
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    const fetchThreads = async () => {
+      const threadCount = await getThreadCountFromContract(); // Replace with your logic to get the total thread count from the smart contract
+
+      const fetchedThreads = [];
+      const totalPages = Math.ceil(threadCount / threadsPerPage);
+      const threadsToFetch = Math.min(threadCount, threadsPerPage);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const startIndex = (i - 1) * threadsPerPage;
+        const endIndex = i * threadsPerPage;
+
+        const threadPromises = [];
+
+        for (let j = startIndex; j <= endIndex && j < threadsToFetch; j++) {
+          threadPromises.push(getThreadFromContract(j)); // Replace with your logic to fetch thread data from the smart contract based on the thread ID
+        }
+        const fetchedThreadData = await Promise.all(threadPromises);
+        //const fetchedThreadData = threadPromises;
+        fetchedThreads.push(...fetchedThreadData);
       }
+
+      setThreads(fetchedThreads);
+      setIsLoading(false);
     };
 
-    const handleSubmitSettleBetPool = async (event) => {
-        event.preventDefault();
-        const contractAddress = contracts.betting_contract.address;
-        const contractABI = contracts.betting_contract.abi;
-    
-        const contract = new web3.eth.Contract(contractABI, contractAddress);
-        const accounts = await web3.eth.getAccounts();
-    
-        setStatus("Submitting transaction...");
-    
-        try {
-          await contract.methods.settleBettingPool(pool_id,reqID,reqInd).send({ from: accounts[0] });
-          setStatus("Transaction successful!");
-        } catch (error) {
-          console.error(error);
-          setStatus("Transaction failed.");
-        }
-      };
+    fetchThreads();
+  }, []);
 
-      const handleSubmitCreateThread = async (event) => {
-        event.preventDefault();
-        const contractAddress = contracts.forum_contract.address;
-        const contractABI = contracts.forum_contract.abi;
-    
-        const contract = new web3.eth.Contract(contractABI, contractAddress);
-        const accounts = await web3.eth.getAccounts();
-    
-        setStatus("Submitting transaction...");
-    
-        try {
-          await contract.methods.createThread(title, pool_id).send({ from: accounts[0] });
-          setStatus("Transaction successful!");
-        } catch (error) {
-          console.error(error);
-          setStatus("Transaction failed.");
-        }
-      };
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-      const handleSubmitPostMessage = async (event) => {
-        event.preventDefault();
-        const contractAddress = contracts.forum_contract.address;
-        const contractABI = contracts.forum_contract.abi;
-    
-        const contract = new web3.eth.Contract(contractABI, contractAddress);
-        const accounts = await web3.eth.getAccounts();
-    
-        setStatus("Submitting transaction...");
-    
-        try {
-          await contract.methods.postMessage(thread_id, message).send({ from: accounts[0] });
-          setStatus("Transaction successful!");
-        } catch (error) {
-          console.error(error);
-          setStatus("Transaction failed.");
-        }
-      };
+  const indexOfLastThread = currentPage * threadsPerPage;
+  const indexOfFirstThread = indexOfLastThread - threadsPerPage;
+  const currentThreads = threads.slice(indexOfFirstThread, indexOfLastThread);
+  console.log(currentThreads);
 
-      const handleSubmitGetThread = async (event) => {
-        event.preventDefault();
-        const contractAddress = contracts.forum_contract.address;
-        const contractABI = contracts.forum_contract.abi;
-    
-        const contract = new web3.eth.Contract(contractABI, contractAddress);
-    
-        const thread = await contract.methods.getThread(thread_id_get).call();
-        setThread(thread);
-      };
+  return (
+    <div>
+      <h1>Thread List</h1>
+      {isLoading ? (
+        <p>Loading threads...</p>
+      ) : threads.length === 0 ? (
+        <p>No threads available.</p>
+      ) : (
+        <ul>
+          {currentThreads.map((thread) => (
+            <li key={thread.id}>
+              <Link to={`/thread/${thread.id}`}>{thread.title}</Link>
+            </li>
+          ))}
+        </ul>
+      )}
 
-    return (
+      {threads.length > threadsPerPage && (
+        <div>
+          <ul className="pagination">
+            {Array.from({ length: Math.ceil(threads.length / threadsPerPage) }).map((_, index) => (
+              <li key={index}>
+                <button onClick={() => handlePageChange(index + 1)}>{index + 1}</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <div>
-        <h1>Create Thread</h1>
-        <form onSubmit={handleSubmitCreateThread}>
+        <h2>Create forum Thread</h2>
+        <form onSubmit={handleSubmitThread}>
             <label>
-                Thread title:
+                Title:
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
             </label>
             <label>
                 Pool ID:
-                <input type="number" value={pool_id} onChange={(e) => setPoolID(e.target.value)} />
+                <input type="number" value={poolID} onChange={(e) => setPoolID(e.target.value)} />
             </label>
             <button type="submit">Submit</button>
-            <p>{status}</p>
         </form>
-
-        <h1>Post message</h1>
-        <form onSubmit={handleSubmitPostMessage}>
-            <label>
-                Thread ID:
-                <input type="number" value={thread_id} onChange={(e) => setThreadID(e.target.value)} />
-            </label>
-            <label>
-                Message:
-                <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
-            </label>
-            <button type="submit">Submit</button>
-            <p>{status}</p>
-        </form>
-
-        <h1>Get Thread</h1>
-        <form onSubmit={handleSubmitGetThread}>
-            <label>
-                Thread ID:
-                <input type="number" value={thread_id_get} onChange={(e) => setThreadIDGet(e.target.value)} />
-            </label>
-            <button type="submit">Submit</button>
-            <p>{thread}</p>
-        </form>
-      </div>
-      
-    );
-  }
-  
-  
+        </div>
+    </div>
+  );
+};
