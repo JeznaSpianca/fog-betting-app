@@ -38,6 +38,9 @@ export function CreatePools() {
 
   return (
     <div>
+      <h1>
+        Create Pool
+      </h1>
       <form onSubmit={handleSubmit}>
         <label>
           Start Date:

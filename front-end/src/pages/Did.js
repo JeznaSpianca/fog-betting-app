@@ -92,10 +92,11 @@ export function DID() {
 
         </form>
         <form onSubmit={getVisible}>
+        <h1>Public  user Profile</h1>
         <input type="text" value={addressgetVis} onChange={(e) => setAddressVis(e.target.value)} />
           <button type="submit">Check Visible </button>
           <div>
-            <h1>Public  user Profile</h1>
+            
             <ul>
             {Object.entries(visibleSettingsGet).map(([key, value]) => (
               <li key={key}>
@@ -107,11 +108,12 @@ export function DID() {
         </form>
 
         <form onSubmit={getPrivate}>
+        <h1>Private user Profile</h1>
         <input type="text" value={addressgetPriv} onChange={(e) => setAddressPriv(e.target.value)} />
         
           <button type="submit">Check Private</button>
           <div>
-            <h1>Private user Profile</h1>
+            
             <ul>
             {Object.entries(privateSettingsGet).map(([key, value]) => (
               <li key={key}>
