@@ -1,6 +1,6 @@
 
 # Peer-to-Peer Betting DApp
-This decentralized application (DApp) allows users to create and join peer-to-peer betting pools for soccer events. The DApp uses smart contracts and digital identifiers (DIDs) to facilitate secure and transparent betting transactions. This repository features smart contracts and the frontend application for interacting with the smart contracts.
+This decentralized application (DApp) allows users to create and join peer-to-peer betting pools for soccer events. The DApp uses smart contracts and digital identifiers (DIDs) to facilitate secure and transparent betting transactions. This repository features smart contracts and the frontend application for interacting with the smart contracts. Smart contract addresses can be seen in addresses.txt and you can look their transactions up in [mumbai explorer](https://mumbai.polygonscan.com/).
 
 ## Features
 - Users control their information through DIDs.
@@ -14,7 +14,7 @@ This decentralized application (DApp) allows users to create and join peer-to-pe
 ![diagram](./documentation/diar-fog.png)
 
 ## Current status of Enetpulse smart oracle
-The Enetpulse smart oracle is currently not working as intended as the offchain API has a long response time (hours or even days). To move to another Smart oracle provider or to use an API call from smart contract, the Betting and Consumer smart contracts will need to be rewritten. For now to test the functionalities of betting pools, existing data on the Consumer smart contracts can be used (more info is in the CreatePools page when you start the app).
+The Enetpulse smart oracle is currently not working as intended as the offchain API has a long response time (hours or even days). To move to another Smart oracle provider or to use an API call from smart contract, the Betting and Consumer smart contracts will need to be rewritten. For now to test the functionalities of betting pools, existing data on the Consumer smart contracts can be used (more info is in the CreatePools page when you start the app). More info on the smart oracle can be seen [here](https://market.link/nodes/Enetpulse/integrations).
 
 ## How to use
 - Given the current situation with the API from the smart oracle, users can create the betting pools with data that was gathered from the smart oracles previously. This can be done in the CreatePools page.

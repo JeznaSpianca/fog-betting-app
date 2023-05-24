@@ -9,24 +9,15 @@ Deployed Consumer contract: https://mumbai.polygonscan.com/address/0x985aE4705d3
 
 Oracle link: https://market.link/nodes/Enetpulse/integrations
 
-Onboarding proces??
-
-
 Test data for bets:
 req id: 0xc5f1c30b7889162a2c72fb6028f16eb9344c18a83dd2a14004a713eb89408103
 game resolve, score: 4:1
 game id: 3901212
 contract add: 0x3A1Ac99373Fd846De2d092F839BA0FD1096286c1
-(0x076c220C3b4b956eB8724bdb1B0D7e8178c73f15)
-Betting contract: 0x1De1E70E1cE1523500F2e6478b37B537dbf94830
-Forum contract: 0x312836079EE826089c17ba20Ec3c6894fE516770
 
 
 
 Reputation contract address on mumbai: 0x992932a326D3F5F855fEB81e30d9c344Db8B72B0
-Betting contract on mumbai: 0xa792ab97CD60F5d90Ac2C34a397743314d3484AE
+Betting contract on mumbai: 0x1869aEe610Aa21eCf9F3cB4C8B301286374Be4ba
 DID contract: 0xa17b17ea742A4a0E2a4815139312822320484714
-
-football-data.org  data in case of enetscore not working:
-api key: 762ad25890e74fcc992bca3322cd3fc3
-premier league id: 2021
+Forum contract: 0x312836079EE826089c17ba20Ec3c6894fE516770
