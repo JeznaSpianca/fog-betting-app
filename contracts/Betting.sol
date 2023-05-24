@@ -53,6 +53,13 @@ contract Betting {
         return poolCount;
     }
 
+    function updateReqID(bytes32 _requestID, uint256 _req_index, uint256 _poolId) public {
+        require(msg.sender == bettingPools[_poolId].owner, "You need to be an owner");
+        BettingPool storage pool = bettingPools[_poolId];
+        pool.requestID = _requestID;
+        pool.req_index = _req_index;
+    }
+
     function placeBet(uint256 _poolId, uint256 _outcome) public payable {
         require(!bettingPools[_poolId].settled, "Pool has already been settled");
         uint256 betId = bettingPools[_poolId].totalBets + 1;

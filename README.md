@@ -1,51 +1,36 @@
 
 # Peer-to-Peer Betting DApp
-This decentralized application (DApp) allows users to create and join peer-to-peer betting pools for various sports events. The DApp uses smart contracts and digital identifiers (DIDs) to facilitate secure and transparent betting transactions. Current version of this repository is set up for smart contracts, which will be developed first.
+This decentralized application (DApp) allows users to create and join peer-to-peer betting pools for soccer events. The DApp uses smart contracts and digital identifiers (DIDs) to facilitate secure and transparent betting transactions. This repository features smart contracts and the frontend application for interacting with the smart contracts.
 
 ## Features
-- User authentication through digital identifiers (DIDs).
+- Users control their information through DIDs.
 - Create and join peer-to-peer betting pools for various sports events.
 - Automated event result determination using smart oracles.
 - Secure and transparent betting transactions through smart contracts.
 - Reputation system for users to rate and review each other's betting behavior.
-- Chatrooms for each betting pool for users to communicate with each other.
+- Forum threads for users to communicate with each other.
 
-## Smart Contract Naming Convention
-In order to maintain consistency and clarity in our code, we will use the following naming convention for our smart contracts:
+## Application diagram
+![diagram](./documentation/diar-fog.png)
 
-- Contracts should be named using PascalCase.
-- Functions should be named using camelCase.
-- Variables should be named using camelCase.
-- Constants should be named using uppercase snake_case.
+## Current status of Enetpulse smart oracle
+The Enetpulse smart oracle is currently not working as intended as the offchain API has a long response time (hours or even days). To move to another Smart oracle provider or to use an API call from smart contract, the Betting and Consumer smart contracts will need to be rewritten. For now to test the functionalities of betting pools, existing data on the Consumer smart contracts can be used (more info is in the CreatePools page when you start the app).
 
-## Data Formats
-The following data formats will be used for data exchange among services:
-
-- JSON: for data exchange between frontend and backend.
-- ABI: for communication between the frontend and the smart contract.
-- Event logs: for tracking transactions and events within the smart contract.
-
-
-## Functionalities
-The Functionalities which will be implemented first are smart contracts.
-
-### Betting Pools
-- Create a new betting pool with a specified sport and event.
-- Join an existing betting pool.
-- Place a bet on an outcome in the pool.
-- Receive a payout automatically based on the results of the event.
-
-### User Reputation
-- Maintain a reputation score based on the accuracy of bets placed.
-- Display the reputation score to other users in the network.
-- Use the reputation score to determine eligibility for certain betting pools.
-
-### DID Management
-Create and manage a decentralized digital identity (DID).
-Share and revoke access to personal information stored in the DID.
-Update the DID with additional information as needed.
+## How to use
+- Given the current situation with the API from the smart oracle, users can create the betting pools with data that was gathered from the smart oracles previously. This can be done in the CreatePools page.
+- When the betting pools are created, the users can bet on the pools and the owner of the pool can then settle it and after that users that won can withdraw their winnings.
+- Users can vote on the reputation of other users which will also incentivize pool owners to not have high fees for their pools.
+- Users can create forum threads and other users can post on the threads. This is all done via a smart contract.
+- Every user can also set their visible and private DID information and everyone can go look at the visible DID information that a user has set.
 
 ## Getting started
 1. Clone the repo.
 2. Install dependencies with `npm install`.
+3. Move to front-end directory with `cd front-end`.
+4. Start the application with `npm start`.
+
+## Usage requirements
+1. To use the application you need to install metamask, you can do that by going [here](https://metamask.io/download/).
+2. Then you need to add mumbai network, which you can do [here](https://wiki.polygon.technology/docs/develop/metamask/config-polygon-on-metamask/).
+3. Lastly you need to obtain some matic mumbai testnet tokens, which you can do [here](https://faucet.polygon.technology/) or [here](https://mumbaifaucet.com/).
 

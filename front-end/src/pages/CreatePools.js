@@ -98,6 +98,7 @@ export function CreatePools() {
             <li>The score of this game was 1:3 for the away team so when the betting pool will be resolved, the bets that bet towards the away team will win.</li>
           </ul>
         </div>
+        <h2>Create pool:</h2>
         <form onSubmit={handleSubmitCreatePool}>
           <div>
             <label>
@@ -107,19 +108,19 @@ export function CreatePools() {
             </div>
             <div>
             <label>
-                Request ID on consumer contract (given the current situation paste this: 0xc5f1c30b7889162a2c72fb6028f16eb9344c18a83dd2a14004a713eb89408103):
+                Request ID on consumer contract (given the current situation paste from example data):
                 <input type="text" value={reqID} onChange={(e) => setReqID(e.target.value)} />
             </label>
             </div>
             <div>
             <label>
-                Request index (should be 0):
+                Request index (paste from example data):
                 <input type="number" value={reqInd} onChange={(e) => setReqInd(e.target.value)} />
             </label>
             </div>
             <div>
             <label>
-                Game ID (should be 3901212):
+                Game ID (paste from example data):
                 <input type="number" value={gameID} onChange={(e) => setGameID(e.target.value)} />
             </label>
             </div>

@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div className='a'>
-      <h1>My dApp</h1>
+      <h1>Betting dApp</h1>
       {web3 && (
         <p>
           Connected to web3 version {web3.version} with accounts:

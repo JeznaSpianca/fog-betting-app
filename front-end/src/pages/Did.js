@@ -75,17 +75,17 @@ export function DID() {
 
   return (
       <div className='a'>
-        <h1>My dApp</h1>
+        <h1>DID</h1>
        <form onSubmit={setVisibleSettings}>
             <label>
-                Visible setting update (example: &#123; 'test': 'test'&#125;):
+                Visible settings update (example: &#123; 'test': 'test'&#125;):
                 <input type="text" value={visibleSettings} onChange={(e) => setVisible(e.target.value)} />
             </label>
             <button type="submit">Update</button>
         </form>
         <form onSubmit={setPrivateSettings}>
            <label>
-                Private setting update (example: &#123; 'test': 'test'&#125;):
+                Private settings update (example: &#123; 'test': 'test'&#125;):
                 <input type="text" value={privateSettings} onChange={(e) => setPrivate(e.target.value)}/>
             </label>
             <button type="submit">Update</button>
