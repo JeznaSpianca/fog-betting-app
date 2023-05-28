@@ -32,6 +32,21 @@ export function Thread() {
         fetchThread();
     }, [threadId]);
 
+    function date(dt) {
+      dt = parseInt(dt)*1000;
+      const date = new Date(dt);
+
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const seconds = date.getSeconds();
+
+      const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+      return formattedDate;
+    }
+
 
     const handleSubmitMessage = async (event) => {
         event.preventDefault();
@@ -56,7 +71,7 @@ export function Thread() {
             <div style={boxStyle} key={thr[0]}>
                 <p>Message:  {thr[1]}</p>
                 <p>Author:  {thr[2]}</p>
-                <p>Date:  {Date(thr[3])}</p>
+                <p>Date:  {date(thr[3])}</p>
             </div>
           ))}
         <div>
