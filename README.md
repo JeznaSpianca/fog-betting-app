@@ -34,3 +34,7 @@ The Enetpulse smart oracle is currently not working as intended as the offchain 
 2. Then you need to add mumbai network, which you can do [here](https://wiki.polygon.technology/docs/develop/metamask/config-polygon-on-metamask/).
 3. Lastly you need to obtain some matic mumbai testnet tokens, which you can do [here](https://faucet.polygon.technology/) or [here](https://mumbaifaucet.com/).
 
+## Work done
+1. Jurij Kolenik: Enetpulse research, betting, forum smart contracs and frontend. Reports.
+2. Patrik Marčok: DID, reputation smart contracts and frontend. Reports.
+
